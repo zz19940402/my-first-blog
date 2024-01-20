@@ -1,4 +1,4 @@
-<!-- --w10安装虚拟环境在djangogirls文件下
+--w10安装虚拟环境在djangogirls文件下
 python -m venv myvenv
 --windows运行虚拟环境
 myvenv\Scripts\activate
@@ -56,11 +56,11 @@ E-mail:951054670@qq.com
 passwd:123456
 --登录后台管理，添加数据
 
---部署第三方平台-PythonAnywhere---github
-<!-- --git下载准备
+--部署第三方平台-PythonAnywhere--->github
+--git下载准备
 --创建文件.gitignore添加以下【东西很多。。。】
---初始化按步骤操作。。。git status---git add .---git commit -m "My Django Girls app, first commit"
---git remote add origin https://github.com/zz19940402/my-first-blog.git---git push -u origin HEAD
+--初始化按步骤操作。。。git status--->git add .--->git commit -m "My Django Girls app, first commit"
+-->git remote add origin https://github.com/zz19940402/my-first-blog.git--->git push -u origin HEAD
 ---注册https://www.pythonanywhere.com/免费账户
 user:zzone7777
 passwd:ZZ15282210497
@@ -96,7 +96,7 @@ passwd:123456
 zzone7777.pythonanywhere.com/admin/
 
 
-<!--提交代码到github在vsc里面修改后
+<--->提交代码到github在vsc里面修改后
 git status
 git add .
 git status 
@@ -104,9 +104,9 @@ git commit -m "changed the HTML for the site"
 git push
 --在zzone7777.pythonanywhere.com下pull 更新下载所有的代码
 git pull
---->
+<--->
 
-<!-- --本地打开Django shell
+--本地打开Django shell
 python manage.py shell
 --显示所有帖子对象
 Post.objects.all()
@@ -126,9 +126,9 @@ Post.objects.create(author=me, title='Sample title', text='Test')
 Post.objects.all()
 --添加更多帖子
 。。。
---筛选对象--找到自己创建的帖子
+--筛选对象-->找到自己创建的帖子
 Post.objects.filter(author=me)
---查找指定--也许我们想在字段中查看所有包含“标题”一词的帖子
+--查找指定-->也许我们想在字段中查看所有包含“标题”一词的帖子
 Post.objects.filter(title__contains='title')
 --获取所有已发布帖子的列表。为此，我们过滤过去设置的所有帖子
 from django.utils import timezone
@@ -190,4 +190,222 @@ h1 a, h2 a {
     color: #C25100;
 }
 --id 指向特定元素
-<a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page"> -->
+<a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page">
+--里加载静态文件。:) 在 和 标记之间，在指向 Bootstrap CSS 文件的链接之后
+<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+--浏览器按照给定的顺序读取文件，因此我们需要确保它位于正确的位置
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head class="page-header">
+        <title>Django Girls blog</title>
+        <a href="https://en.wikipedia.org/wiki/Django" class="external_link" id="link_to_wiki_page"></a>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <header class="page-header">
+            <div class="container">
+                <h1><a href="/">Django Girls Blog</a></h1>
+            </div>
+        </header>
+        <main class="container">
+            <div class="row">
+                <div class="col">
+                    {% for post in posts %}
+                        <article class="post">
+                            <!-- 这个显示日期的地方有排序技巧 -->
+                            <time>published: {{ post.published_date }}</time> 
+                            <h2><a href="">{{ post.title }}</a></h2>
+                            <p>{{ post.text|linebreaksbr }}</p>
+                        </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
+--网站一点空气，增加左侧的边距
+body {
+    padding-left: 25px;
+}
+--blog/templates/blog/post_list.html检查顺序并放在链接到 之前。此行将从 Google Fonts （https://www.google.com/fonts） 导入名为 Lobster 的字体
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+--修改添加blog/static/css/blog.css
+h1 a, h2 a {
+    color: #C25100;
+    font-family: 'Lobster';
+}
+--继续命名HTML代码的某些部分。将包含标头的 替换为以下内容
+<header class="page-header">
+        <div class="container">
+            <h1><a href="/">Django Girls blog</a></h1>
+        </div>
+    </header>
+--现在，将一个类添加到包含博客文章的类中
+<article class="post">
+    <time>published: {{ post.published_date }}</time>
+    <h2><a href="">{{ post.title }}</a></h2>
+    <p>{{ post.text|linebreaksbr }}</p>
+</article>
+--blog/static/css/blog.css修改如下
+.page-header {
+    background-color: #C25100;
+    margin-top: 0;
+    margin-bottom: 40px;
+    padding: 20px 20px 20px 40px;
+}
+
+.page-header h1,
+.page-header h1 a,
+.page-header h1 a:visited,
+.page-header h1 a:active {
+    color: #ffffff;
+    font-size: 36pt;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Lobster', cursive;
+}
+
+.date {
+    color: #828282;
+}
+
+.save {
+    float: right;
+}
+
+.post-form textarea,
+.post-form input {
+    width: 100%;
+}
+
+.top-menu,
+.top-menu:hover,
+.top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+}
+
+.post {
+    margin-bottom: 70px;
+}
+
+.post h2 a,
+.post h2 a:visited {
+    color: #000000;
+}
+
+.post > .date,
+.post > .actions {
+    float: right;
+}
+
+.btn-secondary,
+.btn-secondary:visited {
+    color: #C25100;
+    background: none;
+    border-color: #C25100;
+}
+
+.btn-secondary:hover {
+    color: #FFFFFF;
+    background-color: #C25100;
+}
+--然后用类声明包围显示帖子的 HTML 代码。替换以下内容
+{% for post in posts %}
+    <article class="post">
+        <time>published: {{ post.published_date }}</time>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </article>
+{% endfor %}
+--修改如下blog/templates/blog/post_list.html
+<main class="container">
+    <div class="row">
+        <div class="col">
+            {% for post in posts %}
+                <article class="post">
+                    <time class="date">
+                        {{ post.published_date }}
+                    </time>
+                    <h2><a href="">{{ post.title }}</a></h2>
+                    <p>{{ post.text|linebreaksbr }}</p>
+                </article>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+
+--模板扩展，创建基本模板
+blog/templates/blog/base.html
+--内容如下：
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Django Girls blog</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    </head>
+    <body>
+        <header class="page-header">
+          <div class="container">
+              <h1><a href="/">Django Girls Blog</a></h1>
+          </div>
+        </header>
+        <main class="container">
+            <div class="row">
+                <div class="col">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
+
+
+
+--创建帖子详细信息的模板链接
+--希望在帖子列表中有一个从帖子标题到帖子详情页面的链接
+<h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+--创建帖子详细信息的 URL：blog/urls.py
+path('post/<int:pk>/', views.post_detail, name='post_detail'),
+--添加帖子的详细信息视图：blog/views.py
+from django.shortcuts import render, get_object_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
+--为帖子详细信息创建模板：blog/templates/blog/post_detail.html
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <article class="post">
+        {% if post.published_date %}
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+        {% endif %}
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.text|linebreaksbr }}</p>
+    </article>
+{% endblock %}
+--部署时间
+git status
+git add .
+git status
+git commit -m "Added view and template for detailed blog post as well as CSS for the site."
+git push
