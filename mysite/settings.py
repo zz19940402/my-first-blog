@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'djangogirls',
+        'USER': 'postgres',
+        'PASSWORD': '123456.',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
@@ -125,3 +129,6 @@ STATIC_ROOT = BASE_DIR / 'static'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 登录url设置
+LOGIN_REDIRECT_URL = '/'
